@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ScreenGallery } from "@/components/screen-gallery";
+
 const screens = [
   {
     src: "/screens/home.png",
@@ -131,28 +133,7 @@ export default function Home() {
           These are the screens prepared for Mindo. In the app, shared reminders
           live in Groups.
         </p>
-        <ul className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
-          {screens.slice(1).map((screen) => (
-            <li key={screen.src} className="w-64 shrink-0 snap-start">
-              <figure>
-                <Image
-                  src={screen.src}
-                  alt={screen.alt}
-                  width={471}
-                  height={1024}
-                  sizes="16rem"
-                  className="h-auto w-full"
-                />
-                <figcaption className="mt-3">
-                  <span className="block text-sm font-semibold">{screen.title}</span>
-                  <span className="mt-1 block text-sm leading-6 text-muted">
-                    {screen.caption}
-                  </span>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <ScreenGallery screens={screens} />
       </section>
     </main>
   );

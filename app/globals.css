@@ -7,5 +7,14 @@
   --color-brand: #7138d8;
   --color-brand-soft: #efe8fb;
   --color-line: #e4e1db;
+  --color-background: #ffffff;
+  --color-foreground: #191b23;
+  --color-primary: #7138d8;
+  --color-primary-foreground: #ffffff;
+  --color-border: #e4e1db;
+  --color-input: #e4e1db;
+  --color-ring: #7138d8;
+  --color-accent: #efe8fb;
+  --color-accent-foreground: #191b23;
   --font-sans: var(--font-sans-app), ui-sans-serif, system-ui, sans-serif;
 }

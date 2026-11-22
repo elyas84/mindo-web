@@ -1,19 +1,46 @@
 import type { Metadata } from "next";
 
+/**
+ * TODO (do not publish these as facts until the developer confirms them):
+ * - The proprietor's personal name and postal address were not provided.
+ *   Do not add either.
+ * - Storage countries for MongoDB, Clerk, Cloudinary, and Expo are not confirmed.
+ * - No specific retention period is confirmed for deletion records or backups.
+ * - No date-of-birth check or parental-approval flow is implemented.
+ *   Do not claim that either exists.
+ * - Encryption in transit or at rest was not verified. Do not claim it.
+ */
+
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Draft privacy policy for the Mindo app. Legal entity, contact email, hosting region, and retention period still need to be confirmed.",
+    "How Mindo handles account details, reminders, notes, Shared Spaces, profile pictures, and notifications.",
 };
 
-const missingBeforePublication = [
-  "Legal entity name, country, and any address that must appear on this policy.",
-  "Privacy contact email.",
-  "Where the Mindo API and its database are hosted, including the country or region.",
-  "Whether Cloudinary is enabled for the published app.",
-  "How long account-deletion records and any backups are kept.",
-  "Whether Mindo is intended for children, and the App Store age rating. The app does not ask for age.",
-];
+const linkClass =
+  "underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
+
+const headingClass = "scroll-mt-24 text-2xl font-semibold tracking-tight";
+
+const sections = [
+  ["introduction", "Introduction"],
+  ["controller", "Who is responsible for your personal data?"],
+  ["information-we-collect", "Information we collect"],
+  ["how-we-use", "How we use personal information"],
+  ["account", "Account registration and authentication"],
+  ["reminders-notes-spaces", "Reminders, notes, and Shared Spaces"],
+  ["photos", "Profile pictures and photo library access"],
+  ["notifications", "Notifications"],
+  ["service-providers", "Third-party services and service providers"],
+  ["storage-security", "Data storage and security"],
+  ["retention-deletion", "Data retention and account deletion"],
+  ["international", "International data processing and transfers"],
+  ["your-rights", "Your privacy rights"],
+  ["gdpr", "GDPR-related rights"],
+  ["children", "Children’s privacy"],
+  ["changes", "Changes to this Privacy Policy"],
+  ["contact", "Contact information"],
+] as const;
 
 export default function PrivacyPolicy() {
   return (
@@ -22,289 +49,405 @@ export default function PrivacyPolicy() {
         <header>
           <p className="text-sm font-semibold tracking-widest text-brand">MINDO</p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight">Privacy Policy</h1>
-          <p className="mt-4 text-sm text-muted">Draft, 22 November 2026</p>
+          <p className="mt-4 text-sm text-muted">Last updated 22 November 2026</p>
         </header>
-
-        <aside
-          className="mt-8 rounded-2xl border border-brand/30 bg-brand-soft px-5 py-5"
-          aria-label="Draft notice"
-        >
-          <h2 className="text-lg font-semibold">Not ready for the App Store</h2>
-          <p className="mt-2 leading-7">
-            This page describes only what the Mindo app and its API do in the
-            current code, plus items that are still unknown. Do not submit this
-            URL in App Store Connect until every item below is replaced with a
-            confirmed statement.
-          </p>
-          <ul className="mt-4 list-disc space-y-2 pl-5 leading-7">
-            {missingBeforePublication.map((item) => (
-              <li key={item}>
-                <strong className="font-semibold">Needs confirmation: </strong>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </aside>
 
         <nav className="mt-10" aria-label="On this page">
           <h2 className="text-sm font-semibold tracking-wide text-muted">On this page</h2>
-          <ul className="mt-3 space-y-2 leading-7">
-            <li>
-              <a className="underline underline-offset-4" href="#what-mindo-is">
-                What Mindo is
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#information">
-                Information Mindo handles
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#who-receives-it">
-                Who else receives it
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#how-long">
-                How long it is kept
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#deletion">
-                Deleting your account
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#children">
-                Children
-              </a>
-            </li>
-            <li>
-              <a className="underline underline-offset-4" href="#contact">
-                Contact
-              </a>
-            </li>
-          </ul>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 leading-7">
+            {sections.map(([id, label]) => (
+              <li key={id}>
+                <a className={linkClass} href={`#${id}`}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ol>
         </nav>
 
         <div className="mt-12 space-y-12 leading-7">
-          <section aria-labelledby="what-mindo-is">
-            <h2 id="what-mindo-is" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              What Mindo is
+          <section aria-labelledby="introduction">
+            <h2 id="introduction" className={headingClass}>
+              Introduction
             </h2>
             <p className="mt-4">
-              Mindo is a mobile app for personal reminders, notes, and reminders
-              shared with other people in a group. You need an account. The app
-              sends your information to the Mindo API. The API stores it in a
-              database. The phone does not connect to that database itself.
-            </p>
-            <p className="mt-4">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              the legal name of the person or company that operates Mindo, and
-              the country where that operator is established.
+              This policy explains how Mindo handles personal information. Mindo
+              is a mobile app for personal reminders, notes, and Shared Spaces.
             </p>
           </section>
 
-          <section aria-labelledby="information">
-            <h2 id="information" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              Information Mindo handles
+          <section aria-labelledby="controller">
+            <h2 id="controller" className={headingClass}>
+              Who is responsible for your personal data?
             </h2>
-
-            <h3 className="mt-6 text-lg font-semibold">Account</h3>
-            <p className="mt-3">
-              Sign-in is provided by Clerk. You can create an account with email
-              and a password, or sign in with Google or Apple. Clerk processes
-              the email address, name, and sign-in. The password is not copied
-              into Mindo’s database.
+            <p className="mt-4">
+              Mindo is operated by{" "}
+              <strong className="font-semibold">Elyas Digital Solutions</strong>, a
+              registered sole proprietorship (enskild firma) in Sweden.
             </p>
-            <p className="mt-3">
-              After sign-in, Mindo stores a profile with the Clerk user ID,
-              email address, first name, last name, Clerk profile image address,
-              and the time of the latest account sync. The sign-in session is
-              kept in secure storage on the phone.
+            <p className="mt-4">
+              The data controller responsible for processing your personal data
+              through Mindo is the individual proprietor of Elyas Digital
+              Solutions.
             </p>
-
-            <h3 className="mt-6 text-lg font-semibold">Reminders and notes</h3>
-            <p className="mt-3">
-              A reminder can include a title, an optional description, a date and
-              time, a time zone, a daily or weekday repeat rule, alert choices,
-              and which occurrences you have marked done. A note can include a
-              title and text. Older checklist notes, if one already exists, can
-              still be stored. New notes are text.
+            <p className="mt-4">
+              For privacy-related questions or requests, you can contact:
             </p>
-            <p className="mt-3">
-              This is the content you type so Mindo can show it and remind you.
-              It is stored with your account.
+            <p className="mt-4">
+              <strong className="font-semibold">Email:</strong>{" "}
+              <a className={linkClass} href="mailto:elyasdigitalsolutions@gmail.com">
+                elyasdigitalsolutions@gmail.com
+              </a>
             </p>
-
-            <h3 className="mt-6 text-lg font-semibold">Groups and invitations</h3>
-            <p className="mt-3">
-              A group has a name and an optional description. Membership records
-              who belongs and whether they are an owner or a member. A shared
-              reminder has a title, an optional description, a time, a time zone,
-              alert choices, and a separate done state for each assigned person.
-            </p>
-            <p className="mt-3">
-              An invitation stores the invited email address and a hash of the
-              invitation token. The raw token is not stored. A pending invitation
-              does not expire by age. People in the group can see the shared
-              reminder and who has finished.
-            </p>
-
-            <h3 className="mt-6 text-lg font-semibold">Profile photo</h3>
-            <p className="mt-3">
-              A profile photo is optional. The app asks for photo-library access
-              only so you can choose a picture. It does not take a photo with the
-              camera. The picture is limited to 5 MB. If Cloudinary is
-              configured, the picture is uploaded there.
-            </p>
-            <p className="mt-3">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              whether the published app has Cloudinary turned on.
-            </p>
-
-            <h3 className="mt-6 text-lg font-semibold">Notifications</h3>
-            <p className="mt-3">
-              Notification permission is requested after you choose to allow it,
-              not silently on every launch. Alerts before a reminder, and one
-              follow-up a little later if it is still unfinished, are scheduled
-              on that phone.
-            </p>
-            <p className="mt-3">
-              If you allow notifications, the app registers an Expo push token
-              and the platform, iOS or Android. The server uses that token to
-              send an invitation alert, an alert that a shared reminder was
-              assigned to you, and an alert to the creator when someone else
-              marks a shared reminder done. An assignment or completion alert can
-              include the reminder title. A completion alert can include the
-              other person’s name. An invitation alert does not include the group
-              name.
-            </p>
-
-            <h3 className="mt-6 text-lg font-semibold">On the phone</h3>
-            <p className="mt-3">
-              The phone keeps notification bookkeeping and your appearance
-              choice: light, dark, or match the system. The appearance choice is
-              stored only on the device and is not removed when you delete the
-              account. Signing out removes that account’s local reminder alerts
-              and the push token for that phone. It does not delete the account.
-            </p>
-
-            <h3 className="mt-6 text-lg font-semibold">Not part of the app code</h3>
-            <p className="mt-3">
-              The app code does not include an advertising SDK or an analytics
-              SDK. It does not ask for contacts, location, microphone, or camera
-              access, and it does not read the device calendar. The date picker
-              is only for choosing a reminder time. There is no payment or
-              subscription flow.
-            </p>
-            <p className="mt-3">
-              This is a statement about the app code. It is not yet a legal
-              statement about sale of personal information, and it does not
-              describe logs that Clerk, Expo, Apple, Google, or the database host
-              may keep on their own.
-            </p>
+            <p className="mt-4">This policy does not publish a postal address.</p>
           </section>
 
-          <section aria-labelledby="who-receives-it">
-            <h2 id="who-receives-it" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              Who else receives it
-            </h2>
-            <ul className="mt-4 list-disc space-y-3 pl-5">
-              <li>Clerk, for the account, session, and sign-in with email, Google, or Apple.</li>
-              <li>
-                The database behind the Mindo API, for the profile, reminders,
-                notes, groups, invitations, and push tokens.
-              </li>
-              <li>Cloudinary, if you upload a profile photo and Cloudinary is configured.</li>
-              <li>Expo’s push service, when a remote invitation, assignment, or completion alert is sent.</li>
-              <li>Apple or Google, if you choose those sign-in methods.</li>
-              <li>Other members of a group, for shared reminders and names shown in that group.</li>
-            </ul>
-            <p className="mt-4">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              the hosting provider and country for the API and database, and the
-              country where a profile photo is stored if Cloudinary is used.
-            </p>
-          </section>
-
-          <section aria-labelledby="how-long">
-            <h2 id="how-long" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              How long it is kept
+          <section aria-labelledby="information-we-collect">
+            <h2 id="information-we-collect" className={headingClass}>
+              Information we collect
             </h2>
             <p className="mt-4">
-              Reminders, notes, and group information stay until you delete that
-              item, leave or delete the group, or delete your account. Completion
-              history older than 48 hours can be removed from a reminder. The
-              reminder itself is not deleted by that cleanup.
+              Mindo collects the information you provide and the information
+              needed to run the features below. It does not collect GPS
+              coordinates or track your physical location.
             </p>
-            <p className="mt-4">
-              After account deletion, the server can keep a deletion record with
-              the Clerk user ID, an internal user ID, the deletion status, and
-              error codes. That record does not include your email, name, or
-              reminder text. The code does not delete this record.
-            </p>
-            <p className="mt-4">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              how long the deletion record is kept, and whether backups exist and
-              for how long. Those periods are not set in the app code.
-            </p>
-          </section>
-
-          <section aria-labelledby="deletion">
-            <h2 id="deletion" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              Deleting your account
-            </h2>
-            <p className="mt-4">
-              In the app, open Profile and choose Delete Account. Mindo asks you
-              to confirm twice. Keep the app open until it finishes. If it is
-              interrupted, Mindo can continue the deletion the next time you open
-              the app.
-            </p>
-            <p className="mt-4">The deletion removes:</p>
+            <h3 className="mt-6 text-lg font-semibold">Account and profile</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5">
-              <li>Your reminders, notes, and leftover unused to-do records.</li>
-              <li>Your push tokens and uploaded profile photo, when a photo was stored.</li>
-              <li>Your memberships, invitations addressed to your verified emails, and the groups you own.</li>
-              <li>Shared reminders inside a group you own. That also removes them for the other members.</li>
-              <li>Your Mindo profile and your Clerk account.</li>
+              <li>First name, last name, and email address.</li>
+              <li>A password, when you register with email. Email verification is required.</li>
+              <li>The sign-in method, including Google or Apple if you choose one of those.</li>
+              <li>Clerk user ID, Clerk profile image URL, and account creation, update, and last-seen times.</li>
+              <li>An optional profile picture, stored with its Cloudinary identifier and address.</li>
+            </ul>
+            <h3 className="mt-6 text-lg font-semibold">Content you add</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>Personal reminders, including title, optional description, date and time, repeat settings, notification settings, and completion information.</li>
+              <li>Notes, including title, text, and, for a checklist, its items and whether each item is done.</li>
+              <li>Shared Spaces, including the name, optional description, membership, roles, permissions, invitations, shared reminders, and assignments.</li>
+            </ul>
+            <h3 className="mt-6 text-lg font-semibold">Device information used by the app</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>An IANA time-zone identifier, so a reminder can be scheduled in the right local time. This is not GPS location.</li>
+              <li>An Expo push token and the platform, iOS or Android, if you allow remote notifications.</li>
+              <li>A session token kept on the device, and a local cache of personal reminders.</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="how-we-use">
+            <h2 id="how-we-use" className={headingClass}>
+              How we use personal information
+            </h2>
+            <p className="mt-4">Mindo uses this information to:</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>Create your account, sign you in, and keep the session on your device.</li>
+              <li>Store and show your reminders and notes, including reminders cached on the device.</li>
+              <li>Schedule personal reminder notifications on that device.</li>
+              <li>Run Shared Spaces, invitations, assignments, and completion updates.</li>
+              <li>Show your first name, last name, and profile image to other members of a Shared Space you belong to.</li>
+              <li>Send the remote notifications described below, when you have allowed them.</li>
+              <li>Record the last time your account synced, and delete the account when you ask for that in the app.</li>
             </ul>
             <p className="mt-4">
-              Other people’s personal reminders and notes are not deleted. You
-              cannot leave a group you own until you transfer ownership or delete
-              the group. There is no separate website form for deletion. It is
-              done in the app.
+              The app code does not include an analytics SDK or an advertising
+              SDK. That does not mean Clerk, MongoDB, Cloudinary, Expo, Apple, or
+              Google never process technical or operational logs of their own.
+            </p>
+          </section>
+
+          <section aria-labelledby="account">
+            <h2 id="account" className={headingClass}>
+              Account registration and authentication
+            </h2>
+            <p className="mt-4">
+              Mindo uses Clerk for registration, sign-in, email verification, and
+              password management. You can register with an email address and
+              password, or sign in with Google or Apple.
+            </p>
+            <p className="mt-4">
+              Email registration asks for your first name, last name, email
+              address, and password. You must verify the email address. The
+              password is managed by Clerk and is not stored in Mindo’s MongoDB
+              database.
+            </p>
+            <p className="mt-4">
+              After sign-in, the app stores the session token with Expo
+              SecureStore. On iOS that uses the Keychain. On Android that uses
+              the Keystore. Mindo’s database stores the Clerk user ID, email
+              address, first name, last name, Clerk profile image URL, optional
+              profile-picture details, and the account timestamps described
+              above.
+            </p>
+          </section>
+
+          <section aria-labelledby="reminders-notes-spaces">
+            <h2 id="reminders-notes-spaces" className={headingClass}>
+              Reminders, notes, and Shared Spaces
+            </h2>
+            <p className="mt-4">
+              Personal reminders, notes, and Shared Spaces are stored online in
+              MongoDB. Personal reminders are also cached on the device.
+            </p>
+            <p className="mt-4">
+              A Shared Space stores its name, an optional description, who
+              belongs, each member’s role and permissions, invitations, shared
+              reminders, and assignments. Members of a Shared Space can see other
+              members’ first names, last names, and profile images, and they can
+              see the shared reminders in that space.
+            </p>
+            <p className="mt-4">
+              A reminder stores the time zone needed to interpret its schedule.
+              That identifier is used for scheduling. It is not a record of where
+              you are.
+            </p>
+          </section>
+
+          <section aria-labelledby="photos">
+            <h2 id="photos" className={headingClass}>
+              Profile pictures and photo library access
+            </h2>
+            <p className="mt-4">
+              You can choose a profile picture from your photo library. The app
+              asks for photo-library access for that purpose. Mindo does not
+              offer video uploads or general document and file uploads.
+            </p>
+            <p className="mt-4">
+              If you add a picture, it is stored by Cloudinary. Mindo keeps the
+              picture’s address and Cloudinary public ID with your profile.
+              Choosing a picture is optional.
+            </p>
+          </section>
+
+          <section aria-labelledby="notifications">
+            <h2 id="notifications" className={headingClass}>
+              Notifications
+            </h2>
+            <p className="mt-4">
+              Notifications for your personal reminders are scheduled on the
+              device. They use the reminder details stored for your account and
+              the local cache.
+            </p>
+            <p className="mt-4">
+              Remote notifications are sent through the Expo Push Notification
+              Service for new Shared Space invitations, shared-reminder
+              assignments, and shared-reminder completions. To send those, the
+              database stores an Expo push token and whether the device is iOS or
+              Android.
+            </p>
+            <p className="mt-4">
+              A shared-reminder notification can include the reminder title and a
+              member’s display name. An invitation notification tells you that
+              you have been invited.
+            </p>
+          </section>
+
+          <section aria-labelledby="service-providers">
+            <h2 id="service-providers" className={headingClass}>
+              Third-party services and service providers
+            </h2>
+            <p className="mt-4">
+              Mindo uses other services to operate the app. Information is
+              handled by those services for the purposes below.
+            </p>
+            <ul className="mt-3 list-disc space-y-3 pl-5">
+              <li>
+                <strong className="font-semibold">Clerk.</strong> Registration,
+                sign-in, email verification, and password management.
+              </li>
+              <li>
+                <strong className="font-semibold">MongoDB.</strong> Storage of
+                account profiles, reminders, notes, Shared Spaces, invitations,
+                and related application records.
+              </li>
+              <li>
+                <strong className="font-semibold">Cloudinary.</strong> Storage of
+                optional profile pictures.
+              </li>
+              <li>
+                <strong className="font-semibold">Expo Push Notification Service.</strong>{" "}
+                Delivery of remote notifications for invitations, assignments, and
+                completions.
+              </li>
+              <li>
+                <strong className="font-semibold">Google and Apple.</strong> Used
+                when you choose those sign-in options.
+              </li>
+            </ul>
+            <p className="mt-4">
+              Other members of a Shared Space also receive the shared content and
+              the member names and profile images described above. This policy
+              does not state which country each provider uses for storage.
+            </p>
+          </section>
+
+          <section aria-labelledby="storage-security">
+            <h2 id="storage-security" className={headingClass}>
+              Data storage and security
+            </h2>
+            <p className="mt-4">
+              Account profiles, reminders, notes, Shared Spaces, invitations, and
+              related records are stored in MongoDB. Optional profile pictures
+              are stored by Cloudinary. The session token stays on the device in
+              SecureStore. Passwords stay with Clerk and are not copied into the
+              Mindo database.
+            </p>
+            <p className="mt-4">
+              This policy does not claim that every copy of your information is
+              encrypted, and it does not claim a security certification. Access
+              to your Mindo content requires your signed-in account. Shared Space
+              content is also available to the other members of that space.
+            </p>
+          </section>
+
+          <section aria-labelledby="retention-deletion">
+            <h2 id="retention-deletion" className={headingClass}>
+              Data retention and account deletion
+            </h2>
+            <p className="mt-4">
+              Mindo keeps your profile, reminders, notes, and Shared Space
+              information while your account and that content exist. This policy
+              does not state a fixed number of days for how long each record is
+              kept.
+            </p>
+            <p className="mt-4">
+              You can request account deletion in the app. The deletion process
+              removes your Clerk account and most associated application data,
+              including your profile, personal reminders, notes, uploaded profile
+              picture, push tokens, Shared Spaces you own and their related data,
+              and relevant invitations.
+            </p>
+            <p className="mt-4">
+              Deletion does not promise immediate or absolute erasure of every
+              record. Some limited records may remain. Those can include
+              account-deletion operation records, and shared-reminder history or
+              assignment records that are still associated with other users.
+              Information may also remain where it is needed to keep a Shared
+              Space working for the people who are still in it, to preserve
+              another person’s records, or to finish the deletion process.
+            </p>
+            <p className="mt-4">
+              Signing out removes the session on that device. It does not delete
+              the account. There is no separate deletion form on this website.
+            </p>
+          </section>
+
+          <section aria-labelledby="international">
+            <h2 id="international" className={headingClass}>
+              International data processing and transfers
+            </h2>
+            <p className="mt-4">
+              Mindo uses Clerk, MongoDB, Cloudinary, and the Expo Push
+              Notification Service. Google or Apple also process sign-in
+              information if you choose them. Those providers may process
+              information in countries other than your own.
+            </p>
+            <p className="mt-4">
+              This policy does not name those countries. A storage location is
+              included here only when it has been confirmed, and none has been
+              confirmed for this policy.
+            </p>
+          </section>
+
+          <section aria-labelledby="your-rights">
+            <h2 id="your-rights" className={headingClass}>
+              Your privacy rights
+            </h2>
+            <p className="mt-4">
+              You can view and change your reminders, notes, and profile details
+              in the app. You can delete the account from Profile. Account
+              deletion removes an uploaded profile picture.
+            </p>
+            <p className="mt-4">
+              You can also email{" "}
+              <a className={linkClass} href="mailto:elyasdigitalsolutions@gmail.com">
+                elyasdigitalsolutions@gmail.com
+              </a>{" "}
+              to ask about the personal information Mindo holds, to ask for a
+              correction, or to ask for deletion. Some shared records may remain,
+              as described above.
+            </p>
+          </section>
+
+          <section aria-labelledby="gdpr">
+            <h2 id="gdpr" className={headingClass}>
+              GDPR-related rights
+            </h2>
+            <p className="mt-4">
+              Where the GDPR applies, you may have the right to access your
+              personal information, correct it, erase it, restrict processing,
+              object to processing, and receive certain information in a portable
+              form. Where processing is based on consent, you may withdraw that
+              consent. Withdrawing consent does not affect processing that
+              already happened.
+            </p>
+            <p className="mt-4">
+              You may also lodge a complaint with a data protection supervisory
+              authority. In Sweden, that authority is Integritetsskyddsmyndigheten
+              (IMY).
+            </p>
+            <p className="mt-4">
+              To use these rights with Mindo, email{" "}
+              <a className={linkClass} href="mailto:elyasdigitalsolutions@gmail.com">
+                elyasdigitalsolutions@gmail.com
+              </a>
+              . You can also delete the account in the app. This section
+              describes rights where the law applies. It does not state that
+              every person in every country has each of these rights.
             </p>
           </section>
 
           <section aria-labelledby="children">
-            <h2 id="children" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              Children
+            <h2 id="children" className={headingClass}>
+              Children’s privacy
             </h2>
             <p className="mt-4">
-              The app does not ask for a date of birth and does not have a
-              separate child account or parental-consent flow.
+              Mindo is designed to be a simple reminder app for everyday life and
+              is intended for people of all ages who are able to understand and
+              use its features.
             </p>
             <p className="mt-4">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              whether children are an intended audience, and the age rating you
-              will use on the App Store. This draft does not claim that Mindo is,
-              or is not, directed to children.
+              Mindo does not currently ask users to provide their date of birth
+              or offer separate child accounts.
+            </p>
+            <p className="mt-4">
+              We aim to handle everyone’s personal information responsibly,
+              including information relating to children. If you are a parent or
+              guardian and have questions about a child’s use of Mindo or their
+              personal information, please contact us at{" "}
+              <a className={linkClass} href="mailto:elyasdigitalsolutions@gmail.com">
+                elyasdigitalsolutions@gmail.com
+              </a>
+              .
+            </p>
+          </section>
+
+          <section aria-labelledby="changes">
+            <h2 id="changes" className={headingClass}>
+              Changes to this Privacy Policy
+            </h2>
+            <p className="mt-4">
+              This policy can be updated by publishing a new version at this
+              page. The date at the top will change when that happens. The
+              current version is the one shown on{" "}
+              <a className={linkClass} href="https://mindo-web-coral.vercel.app/privacy">
+                mindo-web-coral.vercel.app/privacy
+              </a>
+              .
             </p>
           </section>
 
           <section aria-labelledby="contact">
-            <h2 id="contact" className="scroll-mt-24 text-2xl font-semibold tracking-tight">
-              Contact
+            <h2 id="contact" className={headingClass}>
+              Contact information
             </h2>
             <p className="mt-4">
-              <strong className="font-semibold">Needs confirmation: </strong>
-              the email address people should use for privacy questions. No
-              support or privacy address is set in the app.
-            </p>
-            <p className="mt-4">
-              This policy will be updated when those confirmed details replace
-              the draft notes. The date at the top will change with that update.
+              Mindo is operated by Elyas Digital Solutions, a registered sole
+              proprietorship (enskild firma) in Sweden. The data controller is
+              the individual proprietor of Elyas Digital Solutions. For privacy
+              questions, email{" "}
+              <a className={linkClass} href="mailto:elyasdigitalsolutions@gmail.com">
+                elyasdigitalsolutions@gmail.com
+              </a>
+              . This policy does not publish a postal address.
             </p>
           </section>
         </div>
