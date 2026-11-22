@@ -1,69 +1,159 @@
 import Image from "next/image";
+import Link from "next/link";
+
+const screens = [
+  {
+    src: "/screens/home.png",
+    title: "Home",
+    alt: "Mindo home screen with a greeting, a shared spaces card, and upcoming reminders for watering the plants and a team meeting.",
+    caption: "What is coming up, in one place.",
+  },
+  {
+    src: "/screens/reminders.png",
+    title: "Reminders",
+    alt: "Mindo reminders screen with nothing scheduled today and two upcoming reminders.",
+    caption: "Today, upcoming, and still there after the time passes.",
+  },
+  {
+    src: "/screens/shared-reminder.png",
+    title: "Shared reminder",
+    alt: "Mindo shared reminder with a date, 67 percent progress, two of three people completed, and three people listed.",
+    caption: "Each person has their own done state.",
+  },
+  {
+    src: "/screens/create-space.png",
+    title: "Create a group",
+    alt: "Mindo screen titled Create a space, with a required name field, an optional description, and a create button.",
+    caption: "A name, and a description if you want one.",
+  },
+  {
+    src: "/screens/notes.png",
+    title: "Notes",
+    alt: "Mindo notes screen with two saved notes: a weekend shopping list and ideas for the weekend.",
+    caption: "Notes you can open again later.",
+  },
+] as const;
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main id="content">
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-brand-soft"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-32 -left-24 size-64 rounded-full bg-brand-soft"
+        />
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-[minmax(0,1fr)_18rem] md:py-20">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold tracking-widest text-brand">MINDO</p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+              A calmer day starts here
+            </h1>
+            <p className="mt-4 text-lg leading-8 text-muted">
+              Tell Mindo what you need to remember. It helps you remember it at
+              the right time, keeps a note when you want one, and lets you share
+              a reminder with other people.
+            </p>
+            <div className="mt-8">
+              <p className="inline-flex rounded-full bg-brand px-5 py-3 text-sm font-medium text-white">
+                Coming to the App Store
+              </p>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-muted">
+                The listing is not live yet, so this is not a download link.
+              </p>
+            </div>
+          </div>
+          <Image
+            src="/screens/home.png"
+            alt={screens[0].alt}
+            width={471}
+            height={1024}
+            priority
+            sizes="(min-width: 768px) 20rem, 100vw"
+            className="mx-auto h-auto w-full max-w-xs"
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-5 py-8" aria-labelledby="keeps-heading">
+        <h2 id="keeps-heading" className="text-3xl font-semibold tracking-tight">
+          What Mindo keeps for you
+        </h2>
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+          <li className="rounded-2xl border border-line bg-white px-5 py-5">
+            <h3 className="text-lg font-semibold">Reminders that stay</h3>
+            <p className="mt-2 leading-7 text-muted">
+              Choose a time. Repeat it daily or on weekdays if you want. It
+              stays until you mark it done, including after the time has passed.
+              If it is still unfinished, Mindo can notify you once more a little
+              later.
+            </p>
+          </li>
+          <li className="rounded-2xl border border-line bg-white px-5 py-5">
+            <h3 className="text-lg font-semibold">Notes</h3>
+            <p className="mt-2 leading-7 text-muted">
+              Save something you want to find later. A shopping list, a thought,
+              a few lines. It stays with your account.
+            </p>
+          </li>
+          <li className="rounded-2xl border border-line bg-white px-5 py-5">
+            <h3 className="text-lg font-semibold">Shared reminders</h3>
+            <p className="mt-2 leading-7 text-muted">
+              Invite someone by email into a group. A shared reminder shows who
+              has finished, and each person marks their own part done.
+            </p>
+          </li>
+          <li className="rounded-2xl border border-line bg-white px-5 py-5">
+            <h3 className="text-lg font-semibold">Your account</h3>
+            <p className="mt-2 leading-7 text-muted">
+              Sign in with email, Google, or Apple. You can delete the account
+              from Profile.{" "}
+              <Link
+                href="/privacy"
+                className="text-ink underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              >
+                Read the privacy policy
+              </Link>
+              .
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-5 py-16" aria-labelledby="screens-heading">
+        <h2 id="screens-heading" className="text-3xl font-semibold tracking-tight">
+          A look at the app
+        </h2>
+        <p className="mt-3 max-w-2xl leading-7 text-muted">
+          These are the screens prepared for Mindo. In the app, shared reminders
+          live in Groups.
+        </p>
+        <ul className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4">
+          {screens.slice(1).map((screen) => (
+            <li key={screen.src} className="w-64 shrink-0 snap-start">
+              <figure>
+                <Image
+                  src={screen.src}
+                  alt={screen.alt}
+                  width={471}
+                  height={1024}
+                  sizes="16rem"
+                  className="h-auto w-full"
+                />
+                <figcaption className="mt-3">
+                  <span className="block text-sm font-semibold">{screen.title}</span>
+                  <span className="mt-1 block text-sm leading-6 text-muted">
+                    {screen.caption}
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }

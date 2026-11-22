@@ -1,0 +1,104 @@
+---
+description: Mindo website development standards and frontend coding rules
+alwaysApply: true
+---
+
+# Mindo – Frontend Development Rules
+
+These rules must be followed for all frontend development in this project.
+
+## 1. No Custom CSS
+
+- Do not write custom CSS.
+- Do not create additional CSS files, CSS modules, styled-components, or emotion styles.
+- Do not use inline styles.
+- Use Tailwind CSS utility classes for styling.
+- Keep styling simple, consistent, and maintainable.
+- Avoid unnecessary arbitrary Tailwind values.
+
+## 2. Use Free UI Component Libraries
+
+- Prefer free and open-source UI component libraries.
+- Use **shadcn/ui** as the primary UI component library.
+- Use Lucide icons when icons are needed.
+- Do not purchase or introduce paid UI libraries.
+- Before creating a component from scratch, check whether shadcn/ui already provides an appropriate component.
+- Avoid installing unnecessary dependencies.
+
+## 3. Keep the Implementation Simple
+
+- Avoid overengineering.
+- Do not introduce unnecessary abstractions, wrappers, providers, or custom hooks.
+- Do not create components that are used only once unless there is a clear reason.
+- Avoid unnecessary dependencies and complex state management.
+- Prefer straightforward, readable solutions.
+- Follow the existing project structure and conventions.
+- Do not introduce architectural patterns without a real requirement.
+
+## 4. Use Proper Semantic HTML
+
+- Always use meaningful HTML elements.
+- Do not default to using `<div>` for everything.
+- Use semantic elements whenever appropriate:
+  - `<header>` for page headers.
+  - `<nav>` for navigation.
+  - `<main>` for primary page content.
+  - `<section>` for meaningful content sections.
+  - `<article>` for standalone content.
+  - `<aside>` for complementary content.
+  - `<footer>` for page footers.
+  - `<form>`, `<label>`, `<input>`, and `<button>` for form interactions.
+- Use heading elements (`h1`–`h6`) in a logical hierarchy.
+- Use `<div>` and `<span>` only when no more appropriate semantic element exists.
+- Never use HTML elements solely for their default visual appearance.
+
+## 5. Next.js Best Practices
+
+- Follow the existing Next.js App Router structure.
+- Use Server Components by default.
+- Only use `"use client"` when client-side interactivity is required.
+- Prefer Next.js built-in features where appropriate.
+- Use `next/link` for internal navigation.
+- Use `next/image` when displaying images.
+- Keep components small and focused.
+- Avoid unnecessary client-side JavaScript.
+
+## 6. Accessibility
+
+- Use accessible HTML elements and correct ARIA attributes when needed.
+- All interactive elements must be keyboard accessible.
+- Provide meaningful labels for form controls.
+- Maintain sufficient color contrast.
+- Do not use clickable `<div>` elements instead of buttons or links.
+- Ensure the website works on mobile, tablet, and desktop.
+
+## 7. Code Quality
+
+- Use TypeScript.
+- Avoid `any` unless absolutely necessary.
+- Use clear and consistent naming conventions.
+- Avoid duplicated code.
+- Remove unused imports and variables.
+- Do not leave placeholder functionality pretending to work.
+- Do not modify unrelated files.
+
+## 8. Development Workflow
+
+Before implementing a feature:
+
+1. Inspect the existing project structure.
+2. Understand the existing dependencies and conventions.
+3. Identify the simplest implementation.
+4. Reuse existing components where possible.
+5. Implement only what is necessary.
+6. Verify that the implementation builds successfully.
+
+**Important:** Do not make architectural changes, install additional libraries, or expand the scope without discussing the reason first.
+
+## Golden Rule
+
+Build simple, clean, accessible, maintainable interfaces.
+
+Prefer native HTML, Next.js features, Tailwind CSS, and shadcn/ui over custom implementations.
+
+Do not overcomplicate simple requirements.
