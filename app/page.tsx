@@ -59,14 +59,9 @@ export default function Home() {
               the right time, keeps a note when you want one, and lets you share
               a reminder with other people.
             </p>
-            <div className="mt-8">
-              <p className="inline-flex rounded-full bg-brand px-5 py-3 text-sm font-medium text-white">
-                Coming to the App Store
-              </p>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-muted">
-                The listing is not live yet, so this is not a download link.
-              </p>
-            </div>
+            <p className="mt-8 text-sm leading-6 text-muted">
+              Mindo is coming to the App Store soon.
+            </p>
           </div>
           <Image
             src="/screens/home.png"

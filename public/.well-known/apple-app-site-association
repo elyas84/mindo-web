@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "GJ6SP7NR7W.app.mindo.mobile",
+        "paths": ["/invite/*"]
+      }
+    ]
+  }
+}
